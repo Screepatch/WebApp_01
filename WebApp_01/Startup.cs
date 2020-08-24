@@ -26,6 +26,17 @@ namespace WebApp_01
                 app.UseDeveloperExceptionPage();
             }
 
+            if (env.IsProduction())
+            {
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapGet("/", async context =>
+                    {
+                        await context.Response.WriteAsync("Is Production!");
+                    });
+                });
+            }
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
